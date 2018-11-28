@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+  </head>
+  <body>
+  
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <h1> API NODE </h1>
+      </div>
+      <div class="row mt-5">
+        
+        <!-- Usuário -->
+        <div class="col">
+
+          <div class="form-inline justify-content-center">
+              <label for="usuario">Usuário</label>
+              <input type="text" class="form-control ml-2 mr-2" name="users" id="users"> 
+              <button class="btn btn-primary mr-1" onclick="getUserById()">Procurar</button>
+              <button class="btn btn-success mr-1" data-toggle="modal" data-target="#myModalUser">Adicionar</button>
+              <button type="button" class="btn btn-default" onclick="recarregarListaComputers()">Recarregar</button>
+          </div>
+
+          <table class="table-users table mt-3">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Profissão</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+        </div>
+
+        <!-- Usuário Modal -->
+        <div id="myModalUser" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>Adicionar usuário</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                
+                <form>
+                  <input type="hidden" value='' name="id"></input>
+                  <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="nome"  />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" />
+                  </div>
+                  <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="text" class="form-control" name="idade" id="idade" />
+                  </div>
+                  <div class="form-group">
+                    <label for="profissao">Profissão</label>
+                    <input type="text" class="form-control" name="profissao" id="profissao" />
+                  </div>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="btnAdicionarUser">Adicionar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Usuário Modal EDITAR -->
+        <div id="myModalUserEditar" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>Editar computador</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                
+                <form>
+                  <input type="hidden" value='' name="id" id='id'></input>
+                  <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="nome"  />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" />
+                  </div>
+                  <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="text" class="form-control" name="idade" id="idade" />
+                  </div>
+                  <div class="form-group">
+                    <label for="profissao">Profissão</label>
+                    <input type="text" class="form-control" name="profissao" id="profissao" />
+                  </div>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="editarUser()">Salvar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <!-- Computador -->
+        <div class="col">
+
+          <div class="form-inline">
+              <label for="usuario">Computador</label>
+              <input type="text" class="form-control ml-2 mr-2" name="computador" id="computador"> 
+              <button class="btn btn-primary mr-1" onclick="getComputerById()">Procurar</button>
+              <button class="btn btn-success mr-1" data-toggle="modal" data-target="#myModalComputador">Adicionar</button>
+              <button type="button" class="btn btn-default" onclick="recarregarListaComputers()">Recarregar</button>
+          </div>
+
+          <table class="table-computers table mt-3">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Memória RAM(GB)</th>
+                <th scope="col">HD(GB)</th>
+                <th scope="col">Sistema Operacional</th>
+                <th scope="col">Fabricante</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+        </div>
+        
+        <!-- Computador Modal -->
+        <div id="myModalComputador" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>Adicionar computador</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                
+                <form>
+                  <input type="hidden" value='' name="id"></input>
+                  <div class="form-group">
+                    <label for="memoria_ram">Memória RAM(GB)</label>
+                    <input type="text" class="form-control" name="memoria_ram" id="memoria_ram"  />
+                  </div>
+                  <div class="form-group">
+                    <label for="hd">HD(GB)</label>
+                    <input type="text" class="form-control" name="hd" id="hd" />
+                  </div>
+                  <div class="form-group">
+                    <label for="sistema_operacional">Sistema Operacional</label>
+                    <input type="text" class="form-control" name="sistema_operacional" id="sistema_operacional" />
+                  </div>
+                  <div class="form-group">
+                    <label for="fabricante">Fabricante</label>
+                    <input type="text" class="form-control" name="fabricante" id="fabricante" />
+                  </div>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="btnAdicionarComputador">Adicionar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Computador Modal EDITAR -->
+        <div id="myModalComputadorEditar" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>Editar computador</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                
+                <form>
+                  <input type="hidden" name="id" id="id">
+                  <div class="form-group">
+                    <label for="memoria_ram">Memória RAM(GB)</label>
+                    <input type="text" class="form-control" name="memoria_ram" id="memoria_ram"  />
+                  </div>
+                  <div class="form-group">
+                    <label for="hd">HD(GB)</label>
+                    <input type="text" class="form-control" name="hd" id="hd" />
+                  </div>
+                  <div class="form-group">
+                    <label for="sistema_operacional">Sistema Operacional</label>
+                    <input type="text" class="form-control" name="sistema_operacional" id="sistema_operacional" />
+                  </div>
+                  <div class="form-group">
+                    <label for="fabricante">Fabricante</label>
+                    <input type="text" class="form-control" name="fabricante" id="fabricante" />
+                  </div>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="editarComputer()">Salvar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>
